@@ -1,11 +1,40 @@
-# 📡 Bandwidth Measurement and Analysis using Mininet & POX
+# Bandwidth Measurement and Analysis using Mininet & POX
 
-## 📌 Overview
+## Overview
 This project measures and analyzes network bandwidth under different configurations using **Mininet** and the **POX SDN controller**. The goal is to understand how factors like congestion, delay, and bandwidth limits affect network performance.
 
 ---
 
-## 🛠️ Technologies Used
+## Network Topology
+
+The experimental setup uses a simple single-switch topology where multiple hosts are connected to a central switch.
+
+### Topology Diagram
+    h1
+     |
+     |
+     s1
+     |
+     |
+    h2
+
+### Extended Topology (Multiple Hosts)
+```
+h1 h2 h3 h4
+|  |  |  |
+-----------
+    s1
+```
+
+### Description
+
+- `h1, h2, h3, h4` → Hosts (end devices generating traffic)
+- `s1` → OpenFlow switch managed by the POX controller
+- All hosts communicate through a single switch, enabling controlled experimentation of bandwidth sharing, delay, and congestion effects.
+
+---
+
+## Technologies Used
 - Mininet (Network Emulator)
 - POX Controller (SDN Controller)
 - iperf (Bandwidth Measurement Tool)
@@ -13,7 +42,7 @@ This project measures and analyzes network bandwidth under different configurati
 
 ---
 
-## 🧠 Objectives
+## Objectives
 - Measure bandwidth using `iperf`
 - Compare different network topologies
 - Analyze performance under:
@@ -24,7 +53,7 @@ This project measures and analyzes network bandwidth under different configurati
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 bandwidth-analysis-mininet/
 │── controller/
 │ └── bandwidth_controller.py
@@ -40,7 +69,7 @@ bandwidth-analysis-mininet/
 
 ---
 
-# 🛠️ Step-by-Step Implementation Guide
+# Step-by-Step Implementation Guide
 
 Follow these technical procedures to replicate the bandwidth measurement and analysis environment.
 
@@ -105,7 +134,7 @@ Use the `iperf` tool to generate TCP traffic and measure the throughput.
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 * **Mininet**: Network Emulator
 * **POX Controller**: Python-based OpenFlow Controller
 * **iperf**: Traffic generator and bandwidth measurement tool
@@ -113,19 +142,20 @@ Use the `iperf` tool to generate TCP traffic and measure the throughput.
 
 ---
 
-## 📊 Results Summary
-The following table outlines the performance metrics captured during the experimental phase:
+## Results Summary
 
-| Scenario | Configuration | Average Bandwidth | Primary Observation |
-| :--- | :--- | :--- | :--- |
-| **Baseline** | `single,2` | **~43 Gbps** | Maximum theoretical throughput; no constraints. |
-| **Congestion** | `single,4` (multi-flow) | **~29 Gbps** | Throughput per flow drops as active hosts compete. |
-| **Limited BW** | `bw=10` | **~8–10 Mbps** | Strict hardware-level capping via `tc` (Traffic Control). |
-| **Delay Impact** | `delay=50ms` | **~70 Mbps** | Significant performance degradation due to TCP ACK latency. |
+The following table outlines the performance metrics observed across different network scenarios:
+
+| Scenario        | Configuration        | Average Bandwidth | Key Observation |
+|----------------|---------------------|------------------|-----------------|
+| Baseline       | `single,2`          | ~43 Gbps         | Maximum throughput with no constraints |
+| Congestion     | `single,4`          | ~29 Gbps         | Bandwidth reduces due to multiple competing flows |
+| Limited BW     | `bw=10`             | ~8–10 Mbps       | Bandwidth capped using Traffic Control (`tc`) |
+| Delay Impact   | `delay=50ms`        | ~70 Mbps         | Throughput drops due to TCP acknowledgment delay |
 
 ---
 
-## 🧠 Key Analysis & Findings
+## Key Analysis & Findings
 1.  **TCP Windowing & Latency**: We observed that while the link might support high bandwidth, a **50ms delay** drastically reduces effective throughput. This is because TCP waits for acknowledgments before sending more data; higher latency slows this feedback loop.
 2.  **Resource Contention**: In the **Congestion** scenario, bandwidth is shared logically among active flows. The SDN controller (POX) manages these flows, but the physical link capacity remains the ultimate bottleneck.
 3.  **Deterministic Capping**: By utilizing the `bw` parameter in Mininet, we successfully demonstrated that software-defined constraints can reliably mimic real-world ISP throttling or hardware limitations.
@@ -133,7 +163,7 @@ The following table outlines the performance metrics captured during the experim
 
 ---
 
-## 📸 Screenshot Manifest
+## Screenshot Manifest
 Visual evidence of the experiments is stored in the `/results` directory:
 
 * `pox_running.png`: Successful initialization of the POX L2 learning module.
@@ -145,7 +175,7 @@ Visual evidence of the experiments is stored in the `/results` directory:
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 1.  **Launch Controller**: 
     `python3 pox.py forwarding.l2_learning misc.bandwidth_controller`
 2.  **Launch Mininet**: 
@@ -155,7 +185,7 @@ Visual evidence of the experiments is stored in the `/results` directory:
 
 ---
 
-## 👩‍💻 Author
+## Author
 **Harsha** *Computer Science Student | Networking & SDN Enthusiast*
 
 

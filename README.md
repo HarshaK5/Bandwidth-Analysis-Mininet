@@ -72,7 +72,7 @@ bandwidth-analysis-mininet/
 
 # Step-by-Step Implementation Guide
 
-Follow these technical procedures to replicate the bandwidth measurement and analysis environment.
+The following steps outline the experimental setup and execution process to replicate the bandwidth measurement and analysis environment.
 
 ---
 

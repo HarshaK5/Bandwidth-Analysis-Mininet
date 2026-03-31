@@ -186,10 +186,12 @@ Visual evidence of the experiments is stored in the `/results` directory:
 
 ---
 
-## Author
-**Harsha** *Computer Science Student | Networking & SDN Enthusiast*
-
----
 ## 🎯 Conclusion
 
 This project demonstrates how network performance is influenced by topology size, latency, and bandwidth constraints, highlighting the importance of efficient traffic management in SDN environments.
+
+---
+
+## Author
+**Harsha** *Computer Science Student | Networking & SDN Enthusiast*
+

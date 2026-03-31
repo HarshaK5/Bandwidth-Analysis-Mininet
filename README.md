@@ -54,18 +54,19 @@ h1 h2 h3 h4
 ---
 
 ## Project Structure
+```
 bandwidth-analysis-mininet/
-│── controller/
+├── controller/
 │ └── bandwidth_controller.py
-│── results/
+├── results/
 │ ├── pox_running.png
 │ ├── ping_success.png
 │ ├── baseline_bandwidth.png
 │ ├── real_congestion.png
 │ ├── limited_bw.png
 │ └── delay_effect.png
-│── README.md
-
+└── README.md
+```
 
 ---
 
@@ -148,14 +149,14 @@ The following table outlines the performance metrics observed across different n
 
 | Scenario        | Configuration        | Average Bandwidth | Key Observation |
 |----------------|---------------------|------------------|-----------------|
-| Baseline       | `single,2`          | ~43 Gbps         | Maximum throughput with no constraints |
+| Baseline       | `single,2`          | ~43 Gbps         | Represents peak achievable throughput under unconstrained conditions |
 | Congestion     | `single,4`          | ~29 Gbps         | Bandwidth reduces due to multiple competing flows |
 | Limited BW     | `bw=10`             | ~8–10 Mbps       | Bandwidth capped using Traffic Control (`tc`) |
 | Delay Impact   | `delay=50ms`        | ~70 Mbps         | Throughput drops due to TCP acknowledgment delay |
 
 ---
 
-## Key Analysis & Findings
+## Key Insights
 1.  **TCP Windowing & Latency**: We observed that while the link might support high bandwidth, a **50ms delay** drastically reduces effective throughput. This is because TCP waits for acknowledgments before sending more data; higher latency slows this feedback loop.
 2.  **Resource Contention**: In the **Congestion** scenario, bandwidth is shared logically among active flows. The SDN controller (POX) manages these flows, but the physical link capacity remains the ultimate bottleneck.
 3.  **Deterministic Capping**: By utilizing the `bw` parameter in Mininet, we successfully demonstrated that software-defined constraints can reliably mimic real-world ISP throttling or hardware limitations.
@@ -188,8 +189,7 @@ Visual evidence of the experiments is stored in the `/results` directory:
 ## Author
 **Harsha** *Computer Science Student | Networking & SDN Enthusiast*
 
+---
+## 🎯 Conclusion
 
-
-=======
-# Bandwidth-Analysis-Mininet
-Bandwidth measurement and analysis using Mininet and POX controller across different network topologies and conditions.
+This project demonstrates how network performance is influenced by topology size, latency, and bandwidth constraints, highlighting the importance of efficient traffic management in SDN environments.

@@ -54,6 +54,17 @@ When a packet is sent from one host to another:
 
 ---
 
+## 🎛️ Role of Controller
+
+The POX controller acts as the **central control unit**:
+
+- Installs flow rules dynamically
+- Enables communication between hosts
+- Manages traffic flow in the network
+- Provides centralized decision-making
+
+---
+
 ## Objectives
 - Measure bandwidth using `iperf`
 - Compare different network topologies

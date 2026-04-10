@@ -42,6 +42,18 @@ h1 h2 h3 h4
 
 ---
 
+### Flow Rule in This Project
+
+When a packet is sent from one host to another:
+
+1. The switch (`s1`) checks its flow table.
+2. If no matching rule is found, it sends the packet to the POX controller.
+3. The controller analyzes the packet and determines the correct output port.
+4. The controller installs a flow rule in the switch.
+5. Subsequent packets follow this rule directly without contacting the controller.
+
+---
+
 ## Objectives
 - Measure bandwidth using `iperf`
 - Compare different network topologies
